@@ -7,12 +7,11 @@ on:
   pull_request:
     branches:
       - main
-    if: github.repository == 'huangxd-/danmu_api'
 
 jobs:
   build:
+    if: github.repository == 'huangxd-/danmu_api'
     runs-on: ubuntu-latest
-
     steps:
       # 检出代码
       - name: Checkout code
@@ -24,6 +23,7 @@ jobs:
         run: |
           VERSION=$(grep "VERSION:" danmu_api/configs/globals.js | sed -E "s/.*VERSION: '(.*)'.*/\1/")
           echo "VERSION=$VERSION" >> $GITHUB_ENV
+
       # 根据分支设置版本号后缀
       - name: Set version suffix
         run: |
